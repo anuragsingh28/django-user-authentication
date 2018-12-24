@@ -29,6 +29,7 @@
 
 
 
+
     </style>
     <!-- Custom styles for this template -->
     <link href="album.css" rel="stylesheet">
@@ -48,13 +49,22 @@
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ml-auto">
+                    {% if user.is_authenticated %}
+                    <li class="nav-item ">
+                        <a class="nav-link" href="javascript:{document.getElementById('logout').submit()}">Logout </a>
+                    </li>
+                    <form id="logout" method="POST" action="{% url 'logout' %}">
+                        {% csrf_token %}
+                        <input type="hidden">
+                    </form>
+                    {% else %}
                     <li class="nav-item ">
                         <a class="nav-link" href="{% url 'signup' %}">Sign Up </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'login' %}">Login</a>
                     </li>
-
+                    {% endif %}
 
                 </ul>
                 <!--<form class="form-inline my-2 my-lg-0">-->
